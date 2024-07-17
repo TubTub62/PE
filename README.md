@@ -7,6 +7,10 @@ This repository aims to use machine learning to help aid protein engineering and
 - Find public datasets
 - Apply their techniques
 
+## To DO
+
+- Fix wrong normilization -something should be from [0, 1] and is [-1, 0]
+
 ## Links
 
 - https://enrich2.readthedocs.io/en/latest/introduction.html
@@ -15,3 +19,4 @@ This repository aims to use machine learning to help aid protein engineering and
 ## Links of interest or use
 
 - https://www.cell.com/current-biology/fulltext/S0960-9822(14)01268-8
+

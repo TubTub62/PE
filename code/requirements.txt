@@ -6,7 +6,6 @@ tables
 matplotlib
 statsmodels 
 openpyxl
-tensorflow
 keras
 scikit-learn
 matplotlib
