@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import MinMaxScaler
+import os
 
 def pca(path, n_components):
 
@@ -14,4 +15,4 @@ def pca(path, n_components):
 
     pca = PCA(n_components=n_components)
     pca.fit(data)
-    return pca.components_
+    np.save(os.path.join("../data/aaindex","aaindex_pca.npy"), pca.components_)

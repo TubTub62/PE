@@ -11,7 +11,7 @@ def df_import(path, n=None):
     
 
 def import_base():
-    f = open("../data/base_gbd1.txt")
+    f = open("../data/gbd1/base_gbd1.txt")
     base = f.readline()
     f.close()
     return base

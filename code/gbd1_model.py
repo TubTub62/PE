@@ -1,23 +1,19 @@
-import sys
-# Use local path
-sys.path.append("/home/surrogate/code/PE/code/auxilliary")
-
 import numpy as np
 import tensorflow as tf
 import keras
 import matplotlib.pyplot as plt
 from keras.layers import Dense, Flatten, Conv1D, MaxPooling1D
 from keras.models import Sequential
-from helper import clear
+from utils import clear
 from mp_preprocess import preprocess
 
 
 clear()
-x_train, x_test, y_train, y_test = preprocess(num_processes=12)
+x_train, x_test, y_train, y_test = preprocess("../data/gbd1/", "gbd1", num_processes=10)
 
-def model_1(x_train, y_train, x_test, y_test, epochs=20, batch_size=64):
+def model_gbd1(x_train, y_train, x_test, y_test, epochs=20, batch_size=64):
     model = Sequential()
-    model.add(keras.Input((25,56)))
+    #model.add(keras.Input((25,56)))
     model.add(Conv1D(filters=128, kernel_size=12, activation='relu', use_bias=True, padding='same'))
     model.add(MaxPooling1D(2))    
     model.add(Conv1D(filters=64, kernel_size=6, activation='relu', use_bias=True))
@@ -31,7 +27,7 @@ def model_1(x_train, y_train, x_test, y_test, epochs=20, batch_size=64):
     history = model.fit(x_train, y_train, epochs=epochs, batch_size=batch_size, verbose=1, validation_data=(x_test, y_test))
     return model, history
 
-model, history = model_1(x_train, y_train, x_test, y_test, epochs=20)
+model, history = model_gbd1(x_train, y_train, x_test, y_test, epochs=20)
 loss, accuracy = model.evaluate(x_test, y_test, batch_size=64, verbose=1)
 
 clear()
