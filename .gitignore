@@ -1,3 +1,9 @@
 venv/
 
 __pycache__
+
+aaindex.npy
+aaindex_pca.npy
+
+*_mutants.npy
+*_fitness.npy
