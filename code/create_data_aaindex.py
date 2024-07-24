@@ -15,6 +15,7 @@ def extract_records():
 def create_data():
     data = extract_records()
     np.save("aaindex.npy", data)
+    print(data)
 
 if __name__ == '__main__':
     create_data()

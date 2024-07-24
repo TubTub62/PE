@@ -16,3 +16,6 @@ def pca(path, n_components):
     pca = PCA(n_components=n_components)
     pca.fit(data)
     np.save(os.path.join("../data/aaindex","aaindex_pca.npy"), pca.components_)
+
+if __name__ == "__main__":
+    pca("../data/aaindex/AAindex1_fixed.csv", 5)
