@@ -1,9 +1,0 @@
-name: enrich2
-dependencies:
-  - python=2.7
-  - numpy
-  - scipy
-  - pandas
-  - pytables
-  - statsmodels
-  - matplotlib
