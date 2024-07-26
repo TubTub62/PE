@@ -9,13 +9,6 @@ def df_import(path, n=None):
         return pd.read_excel(path, header=2, usecols="B:K,N:R")
     return pd.read_excel(path, header=2, usecols="B:K,N:R", nrows=n) 
     
-
-def import_base():
-    f = open("../data/gbd1/base_gbd1.txt")
-    base = f.readline()
-    f.close()
-    return base
-
 def clear():
     os.system("clear")
 

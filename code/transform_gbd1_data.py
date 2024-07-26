@@ -1,10 +1,14 @@
 import numpy as np
-from utils import import_base, df_import, create_xy
+from utils import df_import, create_xy
 import os
 
-df = df_import("../data/gbd1/gbd1_data.xlsx")
-base = import_base()
+data_path = "data/gbd1/"
+
+df = df_import(data_path + "gbd1_data.xlsx")
+f = open(data_path + "base_gbd1.txt")
+base = f.readline()
+f.close()
 mutants, fitness = create_xy(df, base)
 
-np.save(os.path.join("../data/gbd1", "gbd1_mutants.npy"), mutants)
-np.save(os.path.join("../data/gbd1", "gbd1_fitness.npy"), fitness)
+np.save(os.path.join(data_path, "gbd1_mutants.npy"), mutants)
+np.save(os.path.join(data_path, "gbd1_fitness.npy"), fitness)

@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
-data_path = "../data/ube4b/"
+data_path = "data/ube4b/"
 
 f = open(data_path + "ube4b_small_base.txt")
 base = f.readline()

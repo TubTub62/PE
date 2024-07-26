@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 from utils import *
 
 def create_descriptors(mutants):
-    pca_aa = np.load("../data/aaindex/aaindex_pca.npy")
+    pca_aa = np.load("data/aaindex/aaindex_pca.npy")
 
     mutant_identity = [m_identity(mutant) for mutant in mutants]
     mutant_aa = np.array([m_aa(mutant, pca_aa, pca_aa.shape[0]) for mutant in mutants])
