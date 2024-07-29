@@ -1,6 +1,6 @@
 import numpy as np
 from mp_preprocess import preprocess
-from utils import m_identity, m_aa
+from code.data_processing.utils import m_identity, m_aa
 from sklearn.model_selection import train_test_split
 
 if __name__ == '__main__':

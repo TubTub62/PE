@@ -1,52 +1,10 @@
-import tensorflow as tf
-import keras
 import numpy as np
-from keras.models import Sequential
-from keras.layers import Conv1D, Dense, Flatten, Dropout
-from keras.optimizers import Adam
-from builder_core import *
+from .builder_core import *
+from .model_builder import model_builder
 
-
-def model_builder(fl_n, f_size, k_size, f_act,
-                  dl_n, d_size, d_act,
-                  dp_b, dp_a):
-    
-    model = Sequential()
-
-    # Introduce Convolution Part
-    for i in range(fl_n):
-        model.add(Conv1D(
-            filters=f_size[i],
-            kernel_size=k_size[i],
-            activation=f_act
-        ))
-
-    if dp_b:
-        model.add(Dropout(dp_a))
-
-    # Dense Part
-    model.add(Flatten())
-    for i in range(dl_n):
-        model.add(
-            Dense(
-                units=d_size[i],
-                activation=d_act,
-            )
-        )
-    model.add(Dense(2, activation='softmax'))
-
-    #learning_rate = lr
-    model.compile(
-        optimizer=Adam(),
-        loss="mse",
-        metrics=["accuracy"]
-    )
-    return model
-
-def model_search(fl :filter_layers, dl : dense_layers, aux : auxilliary,
+def model_build_and_fit(fl :filter_layers, dl : dense_layers, aux : auxilliary,
                  x_train, y_train, x_test, y_test,
-                 epochs=5,
-                 num_best=5):
+                 epochs=5):
 
     models = []
     fl_len = len(fl.num_layers)
@@ -78,22 +36,32 @@ def model_search(fl :filter_layers, dl : dense_layers, aux : auxilliary,
     models = np.array(models)
     accuracies = np.array(accuracies)
     histories = np.array(histories)
+
+    return accuracies, histories, models
+
+def model_filter(accuracies, histories, models, num_best=5):
+
     sorted_indexes = np.argsort(accuracies)
     sort_acc = accuracies[sorted_indexes]
-    sort_models = models[sorted_indexes]
     sort_histories = histories[sorted_indexes]
+    sort_models = models[sorted_indexes]
 
-    print(sort_acc)
     sort_acc = sort_acc[::-1]
-    sort_models = sort_models[::-1]
     sort_histories[::-1]
+    sort_models = sort_models[::-1]
 
+    sort_acc = sort_acc[:num_best]
+    sort_histories[:num_best]
+    sort_models = sort_models[:num_best]
 
-    for i in range(num_best):
-        print(sort_acc[i])
-        sort_models[i].save(f"model_{i}.keras", overwrite=True)
+    return sort_acc, sort_histories, sort_models
 
-def model_summaries(num_models):
-    for i in range(num_models):
-        model = tf.saved_model.load("model_0.keras")
+def model_save(models):
+
+    for i, model in enumerate(models):
+        model.save(f"model_{i}.keras", overwrite=True)
+
+def model_summaries(models):
+    
+    for model in models:
         model.summary()

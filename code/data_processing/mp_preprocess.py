@@ -1,7 +1,7 @@
 from multiprocessing import Pool
 import numpy as np
 from sklearn.model_selection import train_test_split
-from utils import *
+from .utils import *
 
 def create_descriptors(mutants):
     pca_aa = np.load("data/aaindex/aaindex_pca.npy")

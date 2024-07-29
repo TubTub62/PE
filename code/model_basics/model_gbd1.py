@@ -4,7 +4,7 @@ import keras
 import matplotlib.pyplot as plt
 from keras.layers import Dense, Flatten, Conv1D, MaxPooling1D
 from keras.models import Sequential
-from utils import clear
+from code.data_processing.utils import clear
 from mp_preprocess import preprocess
 
 
@@ -28,7 +28,7 @@ def model_gbd1(x_train, y_train, x_test, y_test, epochs=20, batch_size=64):
     return model, history
 
 model, history = model_gbd1(x_train, y_train, x_test, y_test, epochs=5)
-loss, accuracy = model.evaluate(x_test, y_test, batch_size=128, verbose=1)
+loss, accuracy = model.evaluate(x_test, y_test, batch_size=64, verbose=1)
 
 clear()
 print("Test Accuracy:", accuracy)
