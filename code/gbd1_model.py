@@ -9,7 +9,7 @@ from mp_preprocess import preprocess
 
 
 clear()
-x_train, x_test, y_train, y_test = preprocess("../data/gbd1/", "gbd1", num_processes=10)
+x_train, x_test, y_train, y_test = preprocess("../data/gbd1/", "gbd1", num_processes=8)
 
 def model_gbd1(x_train, y_train, x_test, y_test, epochs=20, batch_size=64):
     model = Sequential()
