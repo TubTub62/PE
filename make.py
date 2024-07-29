@@ -15,23 +15,24 @@ def clean():
         os.remove(path)
 
 def model():
-    print("Choose model (type model name):")
+    print("Choose model (type number):")
     models = ["gbd1", "ube4b"]
     [print(model) for model in models]
-    user_input = input()
+    user_input = int(input())-1
 
     check_pass = False
-    for model in models:
-        if user_input == model:
-            check_pass = True
+    if user_input <= len(models):
+        check_pass = True
     
     if check_pass != True:
         print("Model does not exist")
         return
+    
+    selected_model = models[user_input]
 
     model_paths = g.glob("code/model_*.py")
     for path in model_paths:
-        if user_input in path:
+        if selected_model in path:
             os.system("python " + path)
 
 if __name__ == "__main__":
