@@ -13,7 +13,7 @@ x_train, x_test, y_train, y_test = preprocess("data/gbd1/", "gbd1", num_processe
 
 def model_gbd1(x_train, y_train, x_test, y_test, epochs=20, batch_size=64):
     model = Sequential()
-    #model.add(keras.Input((25,56)))
+    model.add(keras.Input((25,56)))
     model.add(Conv1D(filters=128, kernel_size=12, activation='relu', use_bias=True, padding='same'))
     model.add(MaxPooling1D(2))    
     model.add(Conv1D(filters=64, kernel_size=6, activation='relu', use_bias=True))
@@ -28,7 +28,7 @@ def model_gbd1(x_train, y_train, x_test, y_test, epochs=20, batch_size=64):
     return model, history
 
 model, history = model_gbd1(x_train, y_train, x_test, y_test, epochs=5)
-loss, accuracy = model.evaluate(x_test, y_test, batch_size=64, verbose=1)
+loss, accuracy = model.evaluate(x_test, y_test, batch_size=128, verbose=1)
 
 clear()
 print("Test Accuracy:", accuracy)
