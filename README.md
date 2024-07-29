@@ -6,6 +6,7 @@ This repository aims to use machine learning to help aid protein engineering and
 - Gather Articles in the field
 - Find public datasets
 - Apply their techniques
+- Grid Search & k-fold cross validation
 
 ## Links
 
