@@ -28,7 +28,7 @@ def preprocess_mp(num_processes, mutants):
 
     return results
 
-def preprocess(data_path, data_name, num_processes=2):
+def preprocess(data_path, data_name, test_size=0.2, num_processes=2):
     print("Importing Data")
     mutants = np.load(data_path + f"{data_name}_mutants.npy")
 
@@ -41,7 +41,7 @@ def preprocess(data_path, data_name, num_processes=2):
     fitness = np.load(data_path + f"{data_name}_fitness.npy")
 
     x_train, x_test, y_train, y_test = train_test_split(
-        mutant_consol, fitness, test_size=0.4, shuffle=True, random_state=133)
+        mutant_consol, fitness, test_size=test_size, shuffle=True, random_state=133)
     
     return x_train, x_test, y_train, y_test
     
