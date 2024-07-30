@@ -17,9 +17,20 @@ class dense_layers:
         self.d_size = d_size
         self.activation = activation
 
-class auxilliary:
+class details:
 
     def __init__(self, dropout, learning_rate):
         
         self.dropout = dropout
         self.learning_rate = learning_rate
+
+class construction_info:
+
+    def __init__(self, fl, dl, det, epochs):
+        
+        self.filter_layers = fl
+        self.dense_layers = dl
+        self.details = det
+        self.epochs = epochs
+
+    

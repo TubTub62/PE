@@ -2,26 +2,34 @@ from model_search.builder_core import *
 from model_search.model_search_core import *
 from data_processing.mp_preprocess import preprocess
 
+def search_model(dname, ci : construction_info, filter_models=True, filter_amount=5, save_models=False, display_summaries=False):
+    x_train, x_test, y_train, y_test = preprocess(f"data/{dname}/", dname, test_size=0.2, num_processes=8)
 
-dpath = "data/gbd1/"
-dname = "gbd1"
+    fl = ci.filter_layers
+    dl = ci.dense_layers
+    det = ci.details
+    epochs = ci.epochs
 
-x_train, x_test, y_train, y_test = preprocess(dpath, dname, test_size=0.2, num_processes=10)
+    acc, hist, models = model_build_and_fit(fl, dl, det,
+                                            x_train, y_train, x_test, y_test,
+                                            epochs=epochs)
 
-fl = filter_layers([1,2,3], [128, 64, 32], [4, 4, 4], 'relu')
-dl = dense_layers([1,2,3], [128, 64, 32], 'relu')
-aux = auxilliary([True, 0.25], [0.0001, 0.001, 0.01])
+    if filter_models:
+        acc, hist, models = model_filter(acc, hist, models, num_best=filter_amount)
+
+    if save_models:
+        model_save(models)
+    
+    if display_summaries:
+        model_summaries(models)
+        print(acc)
 
 
-acc, hist, models = model_build_and_fit(fl, dl, aux,
-                                        x_train, y_train, x_test, y_test,
-                                        epochs=1)
+fl = filter_layers([1,2,3,4,5], [512, 256, 128, 64, 32], [16, 12, 8, 4], 'relu')
+dl = dense_layers([1,2,3,4], [256, 128, 64, 32], 'relu')
+det = details([True, 0.25], [0.0001, 0.001, 0.01])
+epochs = 2
 
-acc, hist, models = model_filter(acc, hist, models, 5)
+ci = construction_info(fl, dl, det, epochs)
 
-
-print(acc)
-
-model_save(models)
-
-model_summaries(models)
+search_model('gbd1', ci, True, 10, False, True)

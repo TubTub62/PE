@@ -12,8 +12,9 @@ def model_builder(fl_n, f_size, k_size, f_act,
     for i in range(fl_n):
         model.add(Conv1D(
             filters=f_size[i],
-            kernel_size=k_size[i],
-            activation=f_act
+            kernel_size=k_size,
+            activation=f_act,
+            padding='same'
         ))
 
     if dp_b:
