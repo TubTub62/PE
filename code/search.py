@@ -1,6 +1,6 @@
-from model_search.builder_core import *
-from model_search.model_search_core import *
-from data_processing.mp_preprocess import preprocess
+from .model_search.builder_core import *
+from .model_search.model_search_core import *
+from .data_processing.mp_preprocess import preprocess
 
 def search_model(dname, ci : construction_info, filter_models=True, filter_amount=5, save_models=False, display_summaries=False):
     x_train, x_test, y_train, y_test = preprocess(f"data/{dname}/", dname, test_size=0.2, num_processes=8)
