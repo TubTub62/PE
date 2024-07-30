@@ -43,8 +43,5 @@ def preprocess(data_path, data_name, test_size=0.2, num_processes=2):
     x_train, x_test, y_train, y_test = train_test_split(
         mutant_consol, fitness, test_size=test_size, shuffle=True, random_state=133)
     
+    clear()
     return x_train, x_test, y_train, y_test
-    
-
-""" if __name__ == '__main__':
-    freeze_support() """

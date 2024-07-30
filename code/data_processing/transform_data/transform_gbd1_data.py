@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import os
 from sklearn.preprocessing import MinMaxScaler
+import sys
 
 def df_import(path, n=None):
     if n == None:
@@ -27,14 +28,20 @@ def create_xy(df : pd.DataFrame, base):
     fitness = scaler.transform(df[["Mut1 Fitness", "Mut2 Fitness"]])
     return np.array(mutants), fitness
 
+if __name__ == "__main__":
 
-data_path = "data/gbd1/"
+    data_path = "data/gbd1/"
 
-df = df_import(data_path + "gbd1_data.xlsx", 50000)
-f = open(data_path + "base_gbd1.txt")
-base = f.readline()
-f.close()
-mutants, fitness = create_xy(df, base)
+    if sys.argv[1] == "None":
+        n = None
+    else:
+        n = int(sys.argv[1])
+    
+    df = df_import(data_path + "gbd1_data.xlsx", n)
+    f = open(data_path + "base_gbd1.txt")
+    base = f.readline()
+    f.close()
+    mutants, fitness = create_xy(df, base)
 
-np.save(os.path.join(data_path, "gbd1_mutants.npy"), mutants)
-np.save(os.path.join(data_path, "gbd1_fitness.npy"), fitness)
+    np.save(os.path.join(data_path, "gbd1_mutants.npy"), mutants)
+    np.save(os.path.join(data_path, "gbd1_fitness.npy"), fitness)
