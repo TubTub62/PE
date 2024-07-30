@@ -30,7 +30,7 @@ def create_xy(df : pd.DataFrame, base):
 
 data_path = "data/gbd1/"
 
-df = df_import(data_path + "gbd1_data.xlsx", 10000)
+df = df_import(data_path + "gbd1_data.xlsx", 50000)
 f = open(data_path + "base_gbd1.txt")
 base = f.readline()
 f.close()
