@@ -2,7 +2,7 @@ from keras.models import Sequential
 from keras.layers import Conv1D, Dense, Flatten, Dropout
 from keras.optimizers import Adam
 
-def model_builder(fl_n, f_size, k_size, f_act,
+def builder(fl_n, f_size, k_size, f_act,
                   dl_n, d_size, d_act,
                   dp_b, dp_a):
     

@@ -10,9 +10,9 @@ def search_model(dname, ci : construction_info, filter_models=True, filter_amoun
     det = ci.details
     epochs = ci.epochs
 
-    acc, hist, models = model_build_and_fit(fl, dl, det,
-                                            x_train, y_train, x_test, y_test,
-                                            epochs=epochs)
+    models = model_build(fl, dl, det)
+
+    acc, hist, models = model_fit(models, epochs, x_train, y_train, x_test, y_test)
 
     if filter_models:
         acc, hist, models = model_filter(acc, hist, models, num_best=filter_amount)

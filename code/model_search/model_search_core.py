@@ -1,38 +1,30 @@
 import numpy as np
 from .builder_core import *
-from .model_builder import model_builder
+from .builder import builder
+from itertools import product
 
-def model_build_and_fit(fl :filter_layers, dl : dense_layers, details : details,
-                 x_train, y_train, x_test, y_test,
-                 epochs=5):
+def model_build(fl :filter_layers, dl : dense_layers, details : details,):
 
     models = []
+    # Implement with itertools instead
+    # https://docs.python.org/3/library/itertools.html#itertools.product
     
-    fl_len = len(fl.num_layers)
-    dl_len = len(dl.num_layers)
-    k_len = len(fl.k_size)
+    combs = product(fl.num_layers, dl.num_layers, fl.k_size)
     
-    for i in range(fl_len):
-        for j in range(dl_len):
-            for k in range(k_len):
-                model = model_builder(fl.num_layers[i], fl.f_size, fl.k_size[k], fl.activation,
-                                    dl.num_layers[j], dl.d_size, dl.activation,
-                                    details.dropout[0], details.dropout[1])
-                models.append(model)
+    for comb in combs:
+        model = builder(comb[0], fl.f_size, comb[2], fl.activation,
+                              comb[1], dl.d_size, dl.activation,
+                              details.dropout[0], details.dropout[1])
+        models.append(model)
 
-    for i in reversed(range(fl_len)):
-        for j in reversed(range(dl_len)):
-                for k in reversed(range(k_len)):
-                    model = model_builder(fl.num_layers[i], fl.f_size, fl.k_size[k], fl.activation,
-                                        dl.num_layers[j], dl.d_size, dl.activation,
-                                        details.dropout[0], details.dropout[1])
-                    models.append(model)
+    return models
 
-    print(f"Models to train: {len(models)}")
+def model_fit(models, epochs, x_train, y_train, x_test, y_test):
 
+    print(f"Models to fit: {len(models)}")
     histories = []
     for i, model in enumerate(models):
-        print(f"Training model_{i}")
+        print(f"Fitting: {model}")
         history = model.fit(x_train, y_train, epochs=epochs, batch_size=64, verbose=1,
                             validation_data=(x_test, y_test))
         histories.append(history)
@@ -47,6 +39,7 @@ def model_build_and_fit(fl :filter_layers, dl : dense_layers, details : details,
     histories = np.array(histories)
 
     return accuracies, histories, models
+
 
 def model_filter(accuracies, histories, models, num_best=5):
 
