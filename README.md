@@ -2,10 +2,40 @@
 
 This repository aims to use machine learning to help aid protein engineering and exploring techniques devoloped for this
 
+## How to run scripts
+
+From PE directory run any py file by:
+
+python -m code.*
+
+Example:
+
+python -m code.model_basics.model_gbd1
+
+## Explanation of Protein Databases
+
+### gbd1
+
+Type of protein:
+What is the study trying to show:
+Type of fitness metric:
+
+### ube4b
+
+
+
+
+
+
+
+
+
+
+
 ## To Do
-- Gather Articles in the field
-- Find public datasets
-- Apply their techniques
+- Link and name every paper used for the project
+- Links to datasets
+- Explain all the things about the porteins
 - Grid Search & k-fold cross validation
 
 ## Links
