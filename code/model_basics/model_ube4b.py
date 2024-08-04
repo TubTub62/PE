@@ -4,8 +4,8 @@ import keras
 import matplotlib.pyplot as plt
 from keras.layers import Dense, Flatten, Conv1D, MaxPooling1D
 from keras.models import Sequential
-from ..data_processing.utils import clear
-from ..data_processing.mp_preprocess import preprocess
+from code.data_processing.utils import clear
+from code.data_processing.mp_preprocess import preprocess
 from time import sleep
 
 clear()

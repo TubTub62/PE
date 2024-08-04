@@ -1,6 +1,6 @@
 import numpy as np
 from itertools import product
-from .model_search.builder_core import *
+from code.model_search.builder_core import *
 
 fl = filter_layers([1,2,3,4,5], [512, 256, 128, 64, 32], [16, 12, 8, 4], 'relu')
 dl = dense_layers([1,2,3,4], [256, 128, 64, 32], 'relu')

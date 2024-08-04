@@ -4,13 +4,7 @@ This repository aims to use machine learning to help aid protein engineering and
 
 ## How to run scripts
 
-From PE directory run any py file by:
-
-python -m code.*
-
-Example:
-
-python -m code.model_basics.model_gbd1
+For now export 'PE' directory to your PYTHONPATH
 
 ## Explanation of Protein Databases
 
@@ -37,6 +31,7 @@ Type of fitness metric:
 - Links to datasets
 - Explain all the things about the porteins
 - Grid Search & k-fold cross validation
+- Fix saving and loading models
 
 ## Links
 

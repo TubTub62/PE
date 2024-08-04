@@ -1,7 +1,8 @@
 import numpy as np
-from .builder_core import *
-from .builder import builder
+from code.model_search.builder_core import *
+from code.model_search.builder import builder
 from itertools import product
+import tensorflow as tf
 
 def model_build(fl :filter_layers, dl : dense_layers, details : details,):
 
@@ -9,7 +10,8 @@ def model_build(fl :filter_layers, dl : dense_layers, details : details,):
     # Implement with itertools instead
     # https://docs.python.org/3/library/itertools.html#itertools.product
     
-    combs = product(fl.num_layers, dl.num_layers, fl.k_size)
+    combs = [item for item in product(fl.num_layers, dl.num_layers, fl.k_size)]
+    combs = combs[::-1]
     
     for comb in combs:
         model = builder(comb[0], fl.f_size, comb[2], fl.activation,
@@ -17,14 +19,15 @@ def model_build(fl :filter_layers, dl : dense_layers, details : details,):
                               details.dropout[0], details.dropout[1])
         models.append(model)
 
-    return models
+    return models, combs
 
-def model_fit(models, epochs, x_train, y_train, x_test, y_test):
+def model_fit(models, combs, epochs, x_train, y_train, x_test, y_test):
 
     print(f"Models to fit: {len(models)}")
     histories = []
     for i, model in enumerate(models):
         print(f"Fitting: {model}")
+        print(f"Config: {combs[i]}")
         history = model.fit(x_train, y_train, epochs=epochs, batch_size=64, verbose=1,
                             validation_data=(x_test, y_test))
         histories.append(history)
@@ -61,7 +64,7 @@ def model_filter(accuracies, histories, models, num_best=5):
 def model_save(models):
 
     for i, model in enumerate(models):
-        model.save(f"model_{i}.keras", overwrite=True)
+        tf.saved_model.save(model, f"savde_models/model_{i}")
 
 def model_summaries(models):
     
