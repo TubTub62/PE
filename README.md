@@ -32,6 +32,7 @@ Type of fitness metric:
 - Explain all the things about the porteins
 - Grid Search & k-fold cross validation
 - Fix saving and loading models
+- Add all pdfs and papers used
 
 ## Links
 
