@@ -8,7 +8,7 @@ For now export 'PE' directory to your PYTHONPATH
 
 ## Explanation of Protein Databases
 
-### gbd1
+### GB1 of protein G
 
 Type of protein:
 What is the study trying to show:

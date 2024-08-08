@@ -30,18 +30,18 @@ def create_xy(df : pd.DataFrame, base):
 
 if __name__ == "__main__":
 
-    data_path = "data/gbd1/"
+    data_path = "data/gb1/"
 
     if sys.argv[1] == "None":
         n = None
     else:
         n = int(sys.argv[1])
     
-    df = df_import(data_path + "gbd1_data.xlsx", n)
-    f = open(data_path + "base_gbd1.txt")
+    df = df_import(data_path + "gb1_data.xlsx", n)
+    f = open(data_path + "base_gb1.txt")
     base = f.readline()
     f.close()
     mutants, fitness = create_xy(df, base)
 
-    np.save(os.path.join(data_path, "gbd1_mutants.npy"), mutants)
-    np.save(os.path.join(data_path, "gbd1_fitness.npy"), fitness)
+    np.save(os.path.join(data_path, "gb1_mutants.npy"), mutants)
+    np.save(os.path.join(data_path, "gb1_fitness.npy"), fitness)
