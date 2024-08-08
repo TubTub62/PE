@@ -10,9 +10,13 @@ For now export 'PE' directory to your PYTHONPATH
 
 ### GB1 of protein G
 
-Type of protein:
-What is the study trying to show:
-Type of fitness metric:
+GB1 of protein G is the IgG-binding domain of protein G.
+
+The dataset details all the single and double mutations of between all the positions of the string sequence.
+
+The fitness metric describes binding affinity to IgGFC.
+
+The study that generated this data is exploring the effects of epistatis of mutations to a protein.
 
 ### ube4b
 
